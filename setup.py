@@ -4,12 +4,12 @@ import setuptools
 
 
 # VERSION
-__version__ = '0.0'
-# with open('src/lofile/core/__init__.py') as file:
-    # for line in file.readlines():
-        # if '__version__' in line:
-            # __version__: str
-            # exec(line)
+with open('src/loolclitools/__init__.py') as file:
+    for line in file.readlines():
+        if '__version__' in line:
+            __version__: str
+            exec(line.strip())
+            break
 
 
 # SETUP
