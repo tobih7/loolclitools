@@ -1,0 +1,4 @@
+- make loolclitools a pip installable module
+- also include getpass natively (see stdiomask.getpass)
+  - and when on linux: msvcrt is not a module
+  - instead define getch like it's defined in stdiomask when on unix like systems
