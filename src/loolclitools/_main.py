@@ -23,10 +23,10 @@ enable_ANSI_esc_seq()
 
 # ===  MODIFIED GETCH  === #
 def getch() -> bytes:
-    """just like msvcrt.getch but CTRL+I + CTRL+C will start an interactive console"""
+    '''just like msvcrt.getch but CTRL+I + CTRL+C will start an interactive console'''
     char = _getch()
     from ._interactive_console import InteractiveConsole
-    if char == b"\x09" and _getch() == b"\x03":  # CTRL + I and CTRL + C
+    if char == b'\x09' and _getch() == b'\x03':  # CTRL + I and CTRL + C
         InteractiveConsole()
     else:
         InteractiveConsole.temporary_globals.clear()
@@ -39,20 +39,20 @@ class CursorPosition(NamedTuple):
     y: int
 
     def apply(self):
-        out(f"\x1b[{self.y};{self.x}H")
+        out(f'\x1b[{self.y};{self.x}H')
 
 
 def get_cursor_position() -> CursorPosition:
     data = []
-    print(end="\x1b[6n", flush=True)
-    while (char := _getch()) != b"R":
-        if not char in (b"\x1b", b"["):
+    print(end='\x1b[6n', flush=True)
+    while (char := _getch()) != b'R':
+        if not char in (b'\x1b', b'['):
             data.append(char)
-    return CursorPosition(*map(int, reversed(b"".join(data).split(b";"))))
+    return CursorPosition(*map(int, reversed(b''.join(data).split(b';'))))
 
 
 # ===  OUTPUT FUNCTIONS  === #
-def out(*text: Any, sep: str = "", flush: bool = False) -> None:
+def out(*text: Any, sep: str = '', flush: bool = False) -> None:
     sys.stdout.write(sep.join(map(str, text)))
     if flush:
         sys.stdout.flush()
@@ -64,28 +64,28 @@ def flush() -> None:
 
 # ===  ADVANCED OUTPUT  === #
 def yesno(obj: object) -> str:
-    return "Yes" if obj else "No"
+    return 'Yes' if obj else 'No'
 
 
 def param(name: str, value: str, ljust: int = None) -> None:
-    name += ": "
+    name += ': '
     if ljust:
         name = name.ljust(ljust)
-    out(f"\x1b[0m\x1b[2C{name}\x1b[96m{value}\x1b[0m\n")
+    out(f'\x1b[0m\x1b[2C{name}\x1b[96m{value}\x1b[0m\n')
 
 
 def vline() -> str:
-    return "\x1b(0" + "q" * (os.get_terminal_size().columns - 1) + "\x1b(B"
+    return '\x1b(0' + 'q' * (os.get_terminal_size().columns - 1) + '\x1b(B'
 
 
 # ===  PAUSE === #
 def pause_and_exit():
-    out("\n\x1b[0mPress any key to exit . . . ")
+    out('\n\x1b[0mPress any key to exit . . . ')
     flush()
     while kbhit():
         getch()  # discard waiting input
     getch()
-    out("\n")
+    out('\n')
     flush()
 
 
