@@ -1,28 +1,22 @@
 # lool #
 
-import setuptools
+import sys, os
+from setuptools import setup, find_packages
 
-
-# VERSION
-with open('src/loolclitools/__init__.py') as file:
-    for line in file.readlines():
-        if '__version__' in line:
-            __version__: str
-            exec(line.strip())
-            break
+sys.path.insert(0, os.getcwd())
+from src.loolclitools import __doc__, __version__
 
 
 # SETUP
-setuptools.setup(
+setup(
+    name='loolclitools',
+    version=__version__,
+    author='lool',
+    author_email='txhx38@gmail.com',
+    description='This module brings some tools for building CLIs.',
+    url='https://github.com/txhx38/loolclitools',
 
-    name = 'loolclitools',
-    version = __version__,
-    author = 'lool',
-    author_email = 'txhx38@gmail.com',
-    description = 'This moudle brings some tools for building CLIs.',
-    url = 'https://github.com/txhx38/loolclitools',
-
-    package_dir = {'': 'src'},
-    packages = setuptools.find_packages('src'),
-    python_requires = '>= 3.8',
+    package_dir={'': 'src'},
+    packages=find_packages('src'),
+    python_requires='>= 3.8',
 )
