@@ -7,10 +7,15 @@ from typing import Optional
 
 
 class InteractiveConsole:
-    '''`permanent_globals`: these items will be available in each interactive console
-    `temporary_globals`: these items will be only available within the next interactive console
-    If `temporary_globals` is changed before calling loolclitools.getch(), no matter if an
-    interactive console was started or not, the dictionary will be cleared.'''
+    '''
+        This class starts an interactive console.
+
+        `permanent_globals`: these items will be available in each interactive console
+        `temporary_globals`: these items will be only available within the next interactive console
+        If `temporary_globals` is changed before calling loolclitools.getch(), no matter if an
+        interactive console was started or not, the dictionary will be cleared.
+        So setting `temporary_globals` can also be used for inserting items into potential consoles.
+    '''
 
     permanent_globals = {}
     temporary_globals = {}

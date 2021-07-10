@@ -1,6 +1,6 @@
 # lool CLI Tools #
 
-__version__ = '1.2.4'  # last edit: 09.07.2021
+__version__ = '1.0'  # last edit: 10.07.2021
 
 __all__ = ['enable_ANSI_esc_seq', 'getch', 'CursorPosition',
            'get_cursor_position', 'out', 'flush', 'yesno',

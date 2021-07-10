@@ -1,15 +1,27 @@
 # lool CLI Tools #
 
+'''
+    This file includes functions that can be used
+    to get input from the user.
+'''
+
 import os
 from io import BufferedReader
 from ._main import out, flush, getch, getpass, vline, get_cursor_position
 from typing import Optional
 
+
 NOTEPAD_PATH = os.path.join(os.getenv('windir'), 'System32', 'notepad.exe')
 
 
-# ===  ADVANCED INPUT  === #
+# -----==============-----
+#      ADVANCED INPUT
+# -----==============-----
 def askinput(prompt: str = '', is_password: bool = False) -> str:
+    '''
+        A function for getting input from the user.
+        If `is__password` is True the input will be masked with '*'.
+    '''
     out('\x1b[0m')
     try:
         result = (getpass if is_password else input)(
@@ -24,8 +36,16 @@ def askinput(prompt: str = '', is_password: bool = False) -> str:
         return result
 
 
-# ===  INPUT FOR PATHS  === #
+# -----==========-----
+#      PATH INPUT
+# -----==========-----
 def askpath(prompt: str, /, must_be_file: bool = False, must_be_dir: bool = False) -> str:
+    '''
+        A function for getting a path from the user.
+
+        If `must_be_file` is True only files are accepted.
+        If `must_be_dir` is True only directories are accepted.
+    '''
     out('\x1b[0m\x1b[s')
     def err(msg): return out(
         f'\x1b[B\x1b[2C\x1b[J\x1b[91m{msg}\x1b[0m\x1b[u\x1b[K')
@@ -49,12 +69,17 @@ def askpath(prompt: str, /, must_be_file: bool = False, must_be_dir: bool = Fals
             return filepath
 
 
-# ===  CONSOLE INPUT  === #
+# -----=============-----
+#      CONSOLE INPUT
+# -----=============-----
 def console_input(header: str = None, alt_buf: bool = True) -> str:
-    '''If `alt_buf` is False, no alternative buffer will be created.
-    This should only be used e.g. in loops, where still an alternative buffer is created, before
-    the loop, and exited after the loop. This is useful because instead each time console_input
-    is called the alternative buffer would be destroyed and recreated, which is not necessary.
+    '''
+        A function for getting multi line input from the user inside the console.
+
+        If `alt_buf` is False, no alternative buffer will be created.
+        This should only be used e.g. in loops, where still an alternative buffer is created, before
+        the loop, and exited after the loop. This is useful because instead each time console_input
+        is called the alternative buffer would be destroyed and recreated, which is not necessary.
     '''
 
     if alt_buf:
@@ -84,8 +109,16 @@ def console_input(header: str = None, alt_buf: bool = True) -> str:
     return '\n'.join(text)
 
 
-# ===  NOTEPAD INPUT  === #
+# -----=============-----
+#      NOTEPAD INPUT
+# -----=============-----
 def notepad_input(filename: str, header: Optional[str] = None, suffix: str = '.txt', data: Optional[bytes] = None, notepad_path: os.PathLike = NOTEPAD_PATH) -> BufferedReader:
+    '''
+        A function for getting input from the user using the notepad application.
+
+        This will only work on Windows.
+    '''
+
     from subprocess import Popen, CREATE_NEW_CONSOLE, CREATE_BREAKAWAY_FROM_JOB, TimeoutExpired
     from tempfile import mktemp
 
