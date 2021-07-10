@@ -7,7 +7,8 @@
 
 import os
 from io import BufferedReader
-from ._main import out, flush, getch, getpass, vline, get_cursor_position
+from ._main import out, flush, getch, vline, get_cursor_position
+from ._getpass import getpass
 from typing import Optional
 
 

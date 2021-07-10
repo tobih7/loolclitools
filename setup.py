@@ -13,7 +13,7 @@ setup(
     version=__version__,
     author='lool',
     author_email='txhx38@gmail.com',
-    description='This module brings some tools for building CLIs.',
+    description=__doc__,
     url='https://github.com/txhx38/loolclitools',
 
     package_dir={'': 'src'},
