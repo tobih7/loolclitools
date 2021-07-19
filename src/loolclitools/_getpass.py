@@ -61,8 +61,10 @@ def getpass(prompt: str = "Password: ", mask: str = "*") -> str:
             elif key in (b";", b"<", b"=", b">", b"?", b"@", b"A", b"B", b"C", b"D", b"\x85", b"\x86"):  # F-KEYS
                 continue
 
-        elif ord(key) <= 0x1F or 0x80 <= ord(key) <= 0xA0:  # unprintable
-            continue
+        # elif ord(key) <= 0x1F or 0x80 <= ord(key) <= 0xA0:  # unprintable
+        #     stdout.write(".")
+        #     stdout.flush()
+        #     continue
 
         stdout.write("*")
         stdout.flush()

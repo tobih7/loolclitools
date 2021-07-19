@@ -6,7 +6,6 @@
 
 import sys
 import os
-from getpass import getpass
 from time import perf_counter
 from msvcrt import getch as _getch, kbhit
 from typing import Any, NamedTuple
@@ -27,8 +26,6 @@ def enable_ANSI_esc_seq() -> None:
     kernel32.GetConsoleMode(handle, mode)
     kernel32.SetConsoleMode(handle, c_ulong(4 | mode.contents.value))
 
-
-enable_ANSI_esc_seq()
 
 
 # -----==============-----

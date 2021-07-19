@@ -17,5 +17,5 @@ setup(
     url="https://github.com/txhx38/loolclitools",
     package_dir={"": "src"},
     packages=find_packages("src"),
-    python_requires=">= 3.8",
+    python_requires=">= 3.9",
 )
